@@ -1,0 +1,50 @@
+{
+  "name": "@causalmap/core",
+  "version": "0.1.0",
+  "description": "Deterministic layout, Voronoi partition, polygon merging and hierarchy assembly for CausalMap visualizations",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm run build",
+    "test": "node --test test/*.test.mjs",
+    "test:stress": "node --test test/stress.test.mjs"
+  },
+  "keywords": [
+    "causal-graph",
+    "voronoi",
+    "gvmap",
+    "visualization",
+    "hierarchical-clustering",
+    "force-layout",
+    "svg"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/renzhongli/CausalMap.git",
+    "directory": "packages/core"
+  },
+  "dependencies": {
+    "d3-delaunay": "^6.0.4",
+    "d3-force": "^3.0.0",
+    "seedrandom": "^3.0.5"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.4"
+  }
+}

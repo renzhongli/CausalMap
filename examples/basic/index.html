@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CausalMap — Interactive Demo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f1e8;
+        --fg: #102542;
+        --panel: rgba(255,255,255,0.82);
+        --panel-border: rgba(16,37,66,0.08);
+        --muted: #6c757d;
+        font-family: "IBM Plex Sans", "Inter", system-ui, sans-serif;
+      }
+      body.dark {
+        --bg: #1a1a2e;
+        --fg: #eee;
+        --panel: rgba(30,30,50,0.85);
+        --panel-border: rgba(255,255,255,0.08);
+        --muted: #999;
+      }
+      * { margin: 0; box-sizing: border-box; }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        min-height: 100vh;
+        transition: background 0.4s, color 0.3s;
+      }
+      .page {
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 32px;
+      }
+      /* ── Header ── */
+      header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+      header h1 {
+        font-size: 1.85rem;
+        letter-spacing: -0.02em;
+      }
+      header h1 span { font-weight: 300; opacity: 0.5; }
+      select {
+        font: inherit;
+        font-size: 0.95rem;
+        padding: 8px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--panel-border);
+        background: var(--panel);
+        color: var(--fg);
+        cursor: pointer;
+        min-width: 220px;
+      }
+      select:focus { outline: 2px solid #e76f51; outline-offset: 2px; }
+      /* ── Desc ── */
+      #desc {
+        line-height: 1.6;
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 16px;
+        max-width: 80ch;
+      }
+      /* ── Stats bar ── */
+      .stats {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .stats strong { color: var(--fg); }
+      /* ── Canvas ── */
+      .canvas {
+        background: var(--panel);
+        border: 1px solid var(--panel-border);
+        border-radius: 20px;
+        box-shadow: 0 20px 80px rgba(0,0,0,0.08);
+        padding: 20px;
+        overflow: auto;
+        position: relative;
+        min-height: 300px;
+      }
+      .canvas svg { display: block; max-width: 100%; height: auto; border-radius: 12px; }
+      /* ── Spinner ── */
+      #spinner {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,0.03);
+        border-radius: 20px;
+        z-index: 10;
+      }
+      #spinner::after {
+        content: "";
+        width: 36px; height: 36px;
+        border: 3px solid var(--muted);
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      /* ── Footer ── */
+      footer {
+        margin-top: 24px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        text-align: center;
+      }
+      footer a { color: var(--fg); }
+      @media (max-width: 768px) {
+        .page { padding: 16px; }
+        header h1 { font-size: 1.3rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <h1>CausalMap <span>demo</span></h1>
+        <select id="dataset-select" aria-label="Choose a dataset"></select>
+      </header>
+      <p id="desc"></p>
+      <div class="stats">
+        <span>Nodes: <strong id="node-count">—</strong></span>
+        <span>Edges: <strong id="edge-count">—</strong></span>
+        <span>Regions: <strong id="region-count">—</strong></span>
+        <span>Compute: <strong id="time-ms">—</strong></span>
+      </div>
+      <div class="canvas">
+        <div id="spinner"></div>
+        <div id="app"></div>
+      </div>
+      <footer>
+        <a href="https://github.com/causalmap/causalmap" target="_blank">CausalMap</a> — hierarchical causal graphs rendered as geographic maps.
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

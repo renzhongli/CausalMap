@@ -1,0 +1,25 @@
+{
+  "name": "causalmap-prototype",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @causalmap/core && npm run build --workspace @causalmap/renderer && npm run build --workspace @causalmap/basic-example",
+    "dev": "npm run dev --workspace @causalmap/basic-example",
+    "check": "npm run check --workspace @causalmap/core && npm run check --workspace @causalmap/renderer && npm run check --workspace @causalmap/basic-example",
+    "test": "npm run test --workspace @causalmap/core && npm run test --workspace @causalmap/renderer",
+    "test:stress": "npm run test:stress --workspace @causalmap/core"
+  },
+  "devDependencies": {
+    "@types/d3-delaunay": "^6.0.4",
+    "@types/d3-force": "^3.0.10",
+    "@types/seedrandom": "^3.0.8",
+    "typescript": "^5.8.3",
+    "vite": "^5.4.19",
+    "vitest": "^4.1.4"
+  }
+}

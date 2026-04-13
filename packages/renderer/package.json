@@ -1,0 +1,44 @@
+{
+  "name": "@causalmap/renderer",
+  "version": "0.1.0",
+  "description": "SVG renderer for CausalMap — turns MapLayout into geographic-map-style SVG",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm run build",
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "causal-graph",
+    "svg-renderer",
+    "visualization",
+    "gvmap"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/renzhongli/CausalMap.git",
+    "directory": "packages/renderer"
+  },
+  "peerDependencies": {
+    "@causalmap/core": "^0.1.0"
+  },
+  "devDependencies": {
+    "@causalmap/core": "0.1.0"
+  }
+}
